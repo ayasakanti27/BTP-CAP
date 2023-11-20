@@ -8,15 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompTableService {
     @Autowired
-    CompTableDAO CompTableDAO; 
+   private CompTableDAO CompTableDAO; 
 
     
      public Collection<CompTable> getCompTable(){
-      try{
-      return CompTableDAO.findAll();
-      }catch(Exception exception){
-     throw exception;
-     }
+      
+      return CompTableDAO.jgetAllUsers();
+     
      }
      
 

@@ -1,8 +1,8 @@
-PROCEDURE "GET_COMP_TABLE_BY_ID" (IN ID BIGINT) AS
+PROCEDURE "GET_COMP_TABLE_BY_ID" () AS
 BEGIN
 SELECT
-COMP."Comp_ID",
-COMP."Comp_Name",
+"Comp_ID",
+"Comp_Name",
 COMP."Comp_dept",
 EMP."emp_id",
 EMP."first_name",
