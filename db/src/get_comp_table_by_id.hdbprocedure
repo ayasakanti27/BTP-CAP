@@ -1,0 +1,20 @@
+PROCEDURE "GET_COMP_TABLE_BY_ID" (IN ID BIGINT) AS
+BEGIN
+SELECT
+COMP."Comp_ID",
+COMP."Comp_Name",
+COMP."Comp_dept",
+EMP."emp_id",
+EMP."first_name",
+EMP."last_name",
+EMP."job_title",
+EMP."comp_table_id"
+FROM
+"comp_table"COMP
+INNER JOIN
+"emp_table" AS EMP
+ON
+COMP."Comp_ID" = EMP."comp_table_id"
+WHERE
+COMP."Comp_ID" = :ID;
+END;

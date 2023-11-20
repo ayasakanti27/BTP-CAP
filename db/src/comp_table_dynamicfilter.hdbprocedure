@@ -1,0 +1,11 @@
+PROCEDURE comp_table_dynamicfilter(
+  IN filter_column NVARCHAR(100),  -- Column to filter
+  IN filter_value NVARCHAR(100)   -- Filter value
+) LANGUAGE SQLSCRIPT AS
+BEGIN
+  -- Construct the SQL query dynamically
+  DECLARE sql_query NVARCHAR(1000);
+  sql_query := 'SELECT * FROM "comp_table" WHERE "' || :filter_column || '" = ?';
+  -- Execute the SQL query
+  EXECUTE IMMEDIATE :sql_query USING :filter_value;
+END;

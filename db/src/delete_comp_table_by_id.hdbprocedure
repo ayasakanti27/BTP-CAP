@@ -1,0 +1,39 @@
+PROCEDURE "DELETE_COMP_TABLE_BY_ID" (IN ID INTEGER)  
+AS
+BEGIN
+    DECLARE comp_table_id BIGINT := ID;
+	DECLARE TEMP_COMP_TABLE_ID BIGINT := ID;
+	DECLARE i BIGINT := 0;
+	--error handling to drop temp table
+	DECLARE empty_name CONDITION FOR SQL_ERROR_CODE 10001;
+    DECLARE EXIT HANDLER FOR empty_name
+    BEGIN
+        DROP TABLE #results;
+    END;
+    --error handling to drop temp table
+	CREATE LOCAL TEMPORARY COLUMN TABLE #results (
+        "emp_id" BIGINT,
+        "comp_table_id"  BIGINT
+    );
+    INSERT INTO #results
+    SELECT "emp_id","comp_table_id"
+    FROM "emp_table"
+    WHERE "emp_id" = COMP_TABLE_ID;
+    temp_hirerchy = SELECT * FROM "emp_table" WHERE "comp_table_id" = COMP_TABLE_ID;
+
+    WHILE EXISTS (SELECT 1 FROM "emp_table" WHERE "comp_table_id" = COMP_TABLE_ID) DO
+    INSERT INTO #results
+    SELECT t."emp_id",t."comp_table_id"
+    FROM "emp_table" t
+    JOIN #results r ON t."comp_table_id" = r."emp_id";
+    
+    temp_hirerchy = SELECT * FROM "emp_table" WHERE "comp_table_id" = COMP_TABLE_ID;
+     FOR i in 1..RECORD_COUNT(:temp_hirerchy) do 
+        COMP_TABLE_ID = :temp_hirerchy."emp_id"[:i];
+     END FOR;
+        --SELECT top 1 DISTINCT "id" INTO TEMP_PARENT_ID FROM "property_object_hierarchy" WHERE parent_id = :PARENT_ID;
+END WHILE;
+
+    DELETE FROM "emp_table" WHERE "emp_id" IN (SELECT DISTINCT "emp_id" FROM #results);
+    DROP TABLE #results;
+END;

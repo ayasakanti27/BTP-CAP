@@ -1,0 +1,7 @@
+PROCEDURE "comp_table_sorting"(IN "KEY" NVARCHAR(100))
+AS
+BEGIN
+  DECLARE QUERY NVARCHAR(2000) :='';
+  QUERY = 'SELECT "Comp_ID","Comp_Name","Comp_dept" FROM "comp_table" ORDER BY "' || :KEY || '" DESC';
+  EXECUTE IMMEDIATE :QUERY; 
+END;

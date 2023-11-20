@@ -1,0 +1,18 @@
+PROCEDURE comp_table_page(
+  IN page INT,
+  IN page_size INT
+) LANGUAGE SQLSCRIPT AS
+BEGIN
+  DECLARE offset INT;
+  DECLARE comp_table_records INT;
+
+  -- Calculate the offset based on the page number and page size
+  offset := (:page - 1) * :page_size;
+  -- Get the total number of records
+  SELECT COUNT(*) INTO comp_table_records FROM "comp_table";
+  -- Retrieve the data for the specified page
+  SELECT *
+  FROM "comp_table"
+  ORDER BY "Comp_Name" -- Replace with the appropriate column for sorting
+  LIMIT :page_size OFFSET :offset;
+END;
