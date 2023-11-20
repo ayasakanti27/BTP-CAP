@@ -1,36 +1,58 @@
 package customer.sample.compsample;
 
+
+import org.springframework.stereotype.Component;
+ 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+ 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
-
-import org.springframework.stereotype.Component;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+ 
+import java.util.Date;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
+ 
 import lombok.Getter;
 import lombok.Setter;
 
 
-@SuppressWarnings("serial")
-@Component
+@JsonIgnoreProperties(ignoreUnknown = true)
+@SqlResultSetMapping(name = "user_mapping", classes = @ConstructorResult(targetClass = CompTable.class, columns = {
+        @ColumnResult(name = "Comp_ID", type = Long.class),
+        @ColumnResult(name = "Comp_Name", type = String.class),
+        @ColumnResult(name = "Comp_dept", type = String.class)
+       
+}))
+
+@Entity
 @Getter
 @Setter
-@Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "comp_table")
+
+
+// @Table(name = "comp_table")
 public class CompTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Comp_ID")
+  
     private Long CompID;
 
-    @Column(name = "Comp_Name")
+ 
     private String CompName;
 
-    @Column(name = "Comp_dept")
+  
     private String Compdept;
+
+
+public CompTable(Long CompID,String CompName,String Compdept)
+{
+    this.CompID = CompID;
+     this.CompName = CompName;
+     this.Compdept = Compdept;
+}
 }
