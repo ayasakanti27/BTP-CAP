@@ -1,24 +1,14 @@
-<<<<<<< HEAD
 PROCEDURE "GET_COMP_TABLE_BY_ID" () AS
-=======
-PROCEDURE "GET_COMP_TABLE_BY_ID" ()
-LANGUAGE SQLSCRIPT
-AS
->>>>>>> a3a762f110dc227f731e43c332a62dd55466465d
 BEGIN
 SELECT
 "Comp_ID",
 "Comp_Name",
-<<<<<<< HEAD
 COMP."Comp_dept",
 EMP."emp_id",
 EMP."first_name",
 EMP."last_name",
 EMP."job_title",
 EMP."comp_table_id"
-=======
-"Comp_dept"
->>>>>>> a3a762f110dc227f731e43c332a62dd55466465d
 FROM
 "comp_table";
 END;
