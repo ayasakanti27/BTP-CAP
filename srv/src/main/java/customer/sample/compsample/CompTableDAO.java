@@ -19,7 +19,7 @@ public class CompTableDAO{
             Collection<CompTable> results = new ArrayList<CompTable>();
             if (entityManager != null) {
                   StoredProcedureQuery spEmployees = entityManager
-                    .createStoredProcedureQuery("GET_COMP_TABLE_BY_ID", "user_mapping");
+                    .createStoredProcedureQuery("GET_COMP_TABLE_ALL_DATA", "user_mapping");
             spEmployees.execute();
             @SuppressWarnings("unchecked")
             Collection<CompTable> tempResults = spEmployees.getResultList();
