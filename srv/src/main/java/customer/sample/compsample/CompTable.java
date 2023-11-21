@@ -36,7 +36,7 @@ import lombok.Setter;
 @Setter
 
 
-@Table(name = "comp_table")
+// @Table(name = "comp_table")
 public class CompTable {
     @Id
   
